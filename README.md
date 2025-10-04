@@ -30,7 +30,6 @@ The idea was to build a **web portfolio that feels like using Windows**, complet
 | **Frontend** | HTML5, CSS3, JavaScript / React.js |
 | **Styling** | Tailwind CSS / Custom CSS |
 | **Hosting** | Vercel + GitHub Integration |
-| **Extras** | Framer Motion, Font Awesome, Favicon Generator |
 
 ---
 
