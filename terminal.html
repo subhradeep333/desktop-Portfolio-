@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Blinking block cursor effect */
+        #terminal-input {
+            caret-color: white;   /* Use the native cursor and make it white */
+            caret-shape: block;     /* Tell supported browsers to make it a block */
+        }
+
+        /* Custom scrollbar for the terminal output */
+        #terminal-output::-webkit-scrollbar {
+            width: 8px;
+        }
+        #terminal-output::-webkit-scrollbar-track {
+            background: #2d3748; /* gray-800 */
+        }
+        #terminal-output::-webkit-scrollbar-thumb {
+            background: #4a5568; /* gray-600 */
+            border-radius: 4px;
+        }
+        #terminal-output::-webkit-scrollbar-thumb:hover {
+            background: #718096; /* gray-500 */
+        }
+        
+        /* Inverted text selection color */
+        ::selection {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal-container" class="bg-black text-white font-mono text-sm h-full p-2 flex flex-col" onclick="document.getElementById('terminal-input').focus()">
+        <div id="terminal-output" class="flex-grow overflow-y-auto">
+            </div>
+        <div class="flex items-center mt-1">
+            <span class="text-green-400">user@portfolio:~$ </span>
+            <input type="text" id="terminal-input" class="bg-transparent border-none text-white w-full focus:outline-none" autofocus>
+        </div>
+    </div>
+
+    <script>
+        const output = document.getElementById('terminal-output');
+        const input = document.getElementById('terminal-input');
+        
+        const print = (message) => {
+            const line = `<div>${message}</div>`;
+            output.insertAdjacentHTML('beforeend', line);
+            output.scrollTop = output.scrollHeight;
+        };
+
+        const printCommand = (command) => {
+             const promptLine = `<div><span class="text-green-400">user@portfolio:~$</span> ${command}</div>`;
+             output.insertAdjacentHTML('beforeend', promptLine);
+        };
+
+        const downloadFile = () => {
+            const link = document.createElement('a');
+            // --- FIX: Corrected the path to look inside the 'assets' folder ---
+            link.href = 'assets/resume.pdf';
+            link.setAttribute('download', 'resume.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+        
+        const animateDownload = () => {
+            input.disabled = true;
+            let progress = 0;
+            const progressLine = document.createElement('div');
+            output.appendChild(progressLine);
+
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 8) + 4;
+                if (progress > 100) progress = 100;
+
+                const bar = `[<span class="text-green-400">${'█'.repeat(progress / 5)}</span>${'-'.repeat(20 - progress / 5)}] ${progress}%`;
+                progressLine.innerHTML = `Downloading resume.pdf... ${bar}`;
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    print('Download complete!');
+                    downloadFile();
+                    input.disabled = false;
+                    input.focus();
+                }
+            }, 150);
+        };
+
+        const commands = {
+            help: `Available commands:<br>
+                   - <strong class="text-green-400">about</strong>:    Display information about me<br>
+                   - <strong class="text-green-400">projects</strong>: See my projects<br>
+                   - <strong class="text-green-400">contact</strong>:  Show contact information<br>
+                   - <strong class="text-green-400">ls</strong>:       List available files<br>
+                   - <strong class="text-green-400">download</strong>: Download a file (e.g., download resume.pdf)<br>
+                   - <strong class="text-green-400">clear</strong>:    Clear the terminal screen`,
+            about: 'I am a passionate software developer with experience in building dynamic and responsive web applications.',
+            projects: 'You can see a full list of my projects by opening the "Projects" folder on the desktop.',
+            contact: 'You can email me or find me on GitHub/LinkedIn using the links on the taskbar.',
+            ls: '-rw-r--r-- 1 user 1.2M Oct 4 22:10 <strong class="text-cyan-400">resume.pdf</strong>',
+            download: (args) => {
+                if (args[0] === 'resume.pdf') {
+                    animateDownload();
+                    return ''; // Suppress default output
+                }
+                return `File not found: ${args[0] || ''}. Did you mean 'download resume.pdf'?`;
+            },
+            clear: () => {
+                output.innerHTML = '';
+                return ''; // Suppress default output
+            }
+        };
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const fullCommand = input.value.trim();
+                const [command, ...args] = fullCommand.toLowerCase().split(' ');
+                input.value = '';
+
+                printCommand(fullCommand);
+
+                if (command in commands) {
+                    const result = commands[command];
+                    const output = typeof result === 'function' ? result(args) : result;
+                    if (output) print(output);
+                } else if (command) {
+                    print(`Command not found: ${command}. Type 'help' for options.`);
+                }
+                 output.scrollTop = output.scrollHeight;
+            }
+        });
+        
+        // Initial welcome message
+        print('Portfolio OS [Version 1.0]');
+        print(`(c) ${new Date().getFullYear()}. All rights reserved.`);
+        print("Type 'help' to see available commands.");
+    </script>
+</body>
+</html>

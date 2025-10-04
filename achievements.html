@@ -1,0 +1,86 @@
+<div class="text-slate-700 dark:text-slate-300">
+
+    <div id="achievements-grid">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">My Achievements</h2>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-center">
+            
+            <button class="achievement-item p-4 bg-slate-200/50 dark:bg-slate-700/50 rounded-lg hover:ring-2 ring-indigo-500 transition-all" data-achievement-id="hackathon-winner">
+                <img src="images\campus tank.png" alt="CampusTank Trophy" class="w-16 h-16 mx-auto mb-2">
+                <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">CampusTank Trophy 2024</span>
+            </button>
+
+            <button class="achievement-item p-4 bg-slate-200/50 dark:bg-slate-700/50 rounded-lg hover:ring-2 ring-indigo-500 transition-all" data-achievement-id="top-contributor">
+                <img src="images\vision in motion.png" alt="vision in motion" class="w-16 h-16 mx-auto mb-2">
+                <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">vision in motion 2024</span>
+            </button>
+
+            </div>
+    </div>
+
+    <div id="achievement-detail" class="hidden">
+        <button id="back-to-grid" class="mb-4 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">← Back to all achievements</button>
+        
+        <div class="space-y-4">
+            <img id="detail-image" src="#" alt="Achievement Trophy" class="w-full max-w-sm mx-auto rounded-lg shadow-lg">
+            <h2 id="detail-title" class="text-3xl font-bold text-center text-slate-900 dark:text-white"></h2>
+            <p id="detail-description" class="text-lg"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- DATA for your achievements ---
+    // The keys (e.g., "hackathon-winner") must match the data-achievement-id in the HTML
+    const achievementsData = {
+        "CampusTank Trophy": {
+            title: "Best Overall Project - CodeFest 2025",
+            image: "images/campus tank.png", // The large photo of the trophy
+            description: "I’m incredibly excited to share a memorable milestone in my college journey – participating in Campus Tank, a Shark Tank India–inspired business pitch competition organized by our college. What made it even more special? My team and I were awarded the “Best Business Idea” for our pitch."
+        },
+        "vision in motion": {
+            title: "Top Open Source Contributor",
+            image: "images/vision in motion.png", // A picture of the certificate or award
+            description: "we poured our ideas, energy, and passion into creating a film that we believed in. The journey wasn't easy - from writing and shooting to editing and perfecting every detail - but our hard work paid off when we won 1st Prize among many exceptionally talented teams."
+        }
+        // Add more achievement data here
+    };
+
+    // --- LOGIC to handle clicks ---
+    const gridView = document.getElementById('achievements-grid');
+    const detailView = document.getElementById('achievement-detail');
+    const achievementItems = document.querySelectorAll('.achievement-item');
+    const backButton = document.getElementById('back-to-grid');
+
+    // Get the elements for the detail view
+    const detailImage = document.getElementById('detail-image');
+    const detailTitle = document.getElementById('detail-title');
+    const detailDescription = document.getElementById('detail-description');
+
+    // Add a click listener to each achievement item in the grid
+    achievementItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const achievementId = item.dataset.achievementId;
+            const data = achievementsData[achievementId];
+
+            if (data) {
+                // Populate the detail view with the data
+                detailImage.src = data.image;
+                detailImage.alt = data.title;
+                detailTitle.textContent = data.title;
+                detailDescription.textContent = data.description;
+
+                // Switch views
+                gridView.classList.add('hidden');
+                detailView.classList.remove('hidden');
+            }
+        });
+    });
+
+    // Add click listener for the "Back" button
+    backButton.addEventListener('click', () => {
+        // Switch views back
+        detailView.classList.add('hidden');
+        gridView.classList.remove('hidden');
+    });
+</script>

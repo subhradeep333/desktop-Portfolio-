@@ -1,0 +1,217 @@
+/* === BASE STYLES & LAYOUT === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    transition: background-image 0.3s ease-in-out;
+    /* Light Mode Default: Black text */
+    color: black;
+    background-image: url('images/win11 lightmode.png');
+}
+
+body,
+button,
+a,
+input,
+h1,
+h2,
+h3,
+p,
+span,
+div {
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* === UI PANELS & WINDOWS === */
+.window-body,
+.ui-panel {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.title-bar {
+    cursor: move;
+}
+
+/* === INTERACTIVE ELEMENTS === */
+.desktop-icon {
+    cursor: grab;
+}
+
+.desktop-icon span {
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.desktop-icon.dragging {
+    cursor: grabbing;
+    z-index: 20;
+}
+
+.start-menu {
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+#search-input::placeholder {
+    color: #64748b;
+    /* slate-500 */
+}
+
+/* === THEME TOGGLE === */
+.toggle-checkbox:checked {
+    right: 0;
+    border-color: #68D391;
+}
+
+.toggle-checkbox:checked+.toggle-label {
+    background-color: #68D391;
+}
+
+
+/* ################################### */
+/* ###      DARK MODE STYLES       ### */
+/* ################################### */
+
+.dark body {
+    /* Dark Mode Default: White text */
+    color: white;
+    background-image: url('images/win 11 darkmode.jpg');
+}
+
+.dark .window-body,
+.dark .ui-panel {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Specific Text Elements in Dark Mode --- */
+
+/* FIX: Addresses unreadable text inside windows in dark mode. */
+/* This rule makes main headings (like "Project Information") bold and white. */
+.dark .window-content h2 {
+    color: white;
+    font-weight: 700;
+}
+
+/* This rule makes fainter text (like project titles and labels) a bright, readable color. */
+.dark .window-content h3,
+.dark .window-content h4,
+.dark .window-content label {
+    color: #e2e8f0; /* slate-200 */
+}
+
+
+/* Start Menu icon text */
+.dark .start-menu-app span {
+    font-weight: 600; /* semibold */
+}
+
+/* Darkens placeholder text for better contrast */
+.dark #search-input::placeholder {
+    color: #94a3b8;
+    /* slate-400 */
+}
+
+/* Inverts and brightens dark-colored icons */
+.dark .invert-dark {
+    filter: invert(1) brightness(1.5);
+}
+.dark .invert-dark-2 {
+    filter: invert(1) brightness(2);
+}
+.dark .invert-dark-3 {
+    filter: invert(1) brightness(3);
+}
+.dark .invert-dark-4 {
+    filter: invert(1) brightness(4);
+}
+.dark .invert-dark-5 {
+    filter: invert(1) brightness(5);
+}
+.dark .invert-dark-6 {
+    filter: invert(1) brightness(6);
+}
+.dark .invert-dark-7 {
+    filter: invert(1) brightness(7);
+}
+.dark .invert-dark-8 {
+    filter: invert(1) brightness(8);
+}
+.dark .invert-dark-9 {
+    filter: invert(1) brightness(9);
+}
+.dark .invert-dark-10 {
+    filter: invert(1) brightness(10);
+}
+.dark .invert-dark-15 {
+    filter: invert(1) brightness(15);
+}
+.dark .invert-dark-20 {
+    filter: invert(1) brightness(20);
+}
+.dark .invert-dark-25 {
+    filter: invert(1) brightness(25);
+}
+.dark .invert-dark-30 {
+    filter: invert(1) brightness(30);
+}
+.dark .invert-dark-35 {
+    filter: invert(1) brightness(35);
+}
+.dark .invert-dark-40 {
+    filter: invert(1) brightness(40);
+}
+.dark .invert-dark-50 {
+    filter: invert(1) brightness(50);
+}
+.dark .invert-dark-60 {
+    filter: invert(1) brightness(60);
+}
+.dark .invert-dark-70 {
+    filter: invert(1) brightness(70);
+}
+.dark .invert-dark-80 {
+    filter: invert(1) brightness(80);
+}
+.dark .invert-dark-90 {
+    filter: invert(1) brightness(90);
+}
+.dark .invert-dark-100 {
+    filter: invert(1) brightness(100);
+}
+.dark .invert-dark-150 {
+    filter: invert(1) brightness(150);
+}
+.dark .invert-dark-200 {
+    filter: invert(1) brightness(200);
+}
+.dark .invert-dark-250 {
+    filter: invert(1) brightness(250);
+}
+.dark .invert-dark-300 {
+    filter: invert(1) brightness(300);
+}
+.dark .invert-dark-400 {
+    filter: invert(1) brightness(400);
+}
+.dark .invert-dark-500 {
+    filter: invert(1) brightness(500);
+}
+.dark .invert-dark-600 {
+    filter: invert(1) brightness(600);
+}
+.dark .invert-dark-700 {
+    filter: invert(1) brightness(700);
+}
+.dark .invert-dark-800 {
+    filter: invert(1) brightness(800);
+}
+.dark .invert-dark-900 {
+    filter: invert(1) brightness(900);
+}
+.dark .invert-dark-1000 {
+    filter: invert(1) brightness(1000);
+}

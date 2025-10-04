@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRC | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        // This script must remain in the head to prevent a flash of incorrect theme
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+
+<body class="bg-slate-200 select-none">
+    <div id="desktop" class="w-screen h-screen hidden md:block">
+        <div id="desktop-icons" class="p-4 relative w-full h-full">
+            <button data-id="settings" data-title="⚙️ Settings" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 1rem; left: 1rem;"><img src="https://img.icons8.com/fluency/48/settings.png" alt="Settings" class="w-12 h-12" /><span class="text-sm">Settings</span></button>
+            <button data-id="projects" data-title="📁 Projects" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 6.5rem; left: 1rem;"><img src="https://img.icons8.com/fluent/48/000000/folder-invoices.png" alt="Projects" class="w-12 h-12 invert-dark" /><span class="text-sm">Projects</span></button>
+            <button data-id="education" data-title="🎓 Education" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 12rem; left: 1rem;"><img src="https://img.icons8.com/fluent/48/user-folder.png" alt="Personal" class="w-12 h-12" /><span class="text-sm">Personal Folder</span></button>
+            <button data-id="email" data-title="📧 Mail" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 17.5rem; left: 1rem;"><img src="https://img.icons8.com/fluency/48/new-post.png" alt="Email" class="w-12 h-12" /><span class="text-sm">Email Me</span></button>
+            
+            <a href="assets/resume.pdf" download="resume.pdf" class="desktop-icon flex flex-col items-center space-y-1 absolute" style="top: 23rem; left: 1rem;"><img src="https://img.icons8.com/fluency/48/pdf.png" alt="Resume" class="w-12 h-12" /><span class="text-sm">Resume.pdf</span></a>
+            
+            <button data-id="achievements" data-title="🏆 Achievements" tabindex="0" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 28.5rem; left: 1rem;"><img src="https://img.icons8.com/fluency/48/trophy.png" alt="Achievements" class="w-12 h-12" /><span class="text-sm">Achievements</span></button>
+            <button data-id="pictures" data-title="🏞️ Pictures" tabindex="0" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 34rem; left: 1rem;"><img src="https://img.icons8.com/fluency/48/image.png" alt="Pictures" class="w-12 h-12" /><span class="text-sm">Pictures</span></button>
+            <button data-id="terminal" data-title="/> Terminal" tabindex="0" class="desktop-icon open-window-btn flex flex-col items-center space-y-1 absolute" style="top: 39.5rem; left: 1rem;"><img src="https://img.icons8.com/fluency/48/console.png" alt="Terminal" class="w-12 h-12" /><span class="text-sm">Terminal</span></button>
+        </div>
+        <main id="window-container"></main>
+    </div>
+
+    <div id="start-menu" class="start-menu ui-panel absolute bottom-14 left-1/2 -translate-x-1/2 w-full max-w-lg p-4 rounded-lg shadow-2xl hidden opacity-0 translate-y-4 z-[49]">
+        <h3 class="font-bold mb-4">Pinned</h3>
+        <div class="grid grid-cols-4 gap-4">
+             <button data-id="settings" data-title="⚙️ Settings" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluency/48/settings.png" alt="Settings" class="w-10 h-10" /><span class="text-xs mt-1">Settings</span></button>
+            <button data-id="projects" data-title="📁 Projects" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluent/48/000000/folder-invoices.png" alt="Projects" class="w-10 h-10 invert-dark" /><span class="text-xs mt-1">Projects</span></button>
+            <button data-id="education" data-title="🎓 Education" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluent/48/user-folder.png" alt="Personal" class="w-10 h-10" /><span class="text-xs mt-1">Personal</span></button>
+            <button data-id="email" data-title="📧 Mail" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluency/48/new-post.png" alt="Email" class="w-10 h-10" /><span class="text-xs mt-1">Email Me</span></button>
+            
+            <a href="assets/resume.pdf" download="resume.pdf" class="flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluency/48/pdf.png" alt="Resume" class="w-10 h-10" /><span class="text-xs mt-1">Resume</span></a>
+            
+            <button data-id="achievements" data-title="🏆 Achievements" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluency/48/trophy.png" alt="Achievements" class="w-10 h-10" /><span class="text-xs mt-1">Achievements</span></button>
+            <button data-id="pictures" data-title="🏞️ Pictures" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluency/48/image.png" alt="Pictures" class="w-10 h-10" /><span class="text-xs mt-1">Pictures</span></button>
+            <button data-id="terminal" data-title="> Terminal" class="start-menu-app flex flex-col items-center p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><img src="https://img.icons8.com/fluency/48/console.png" alt="Terminal" class="w-10 h-10" /><span class="text-xs mt-1">Terminal</span></button>
+        </div>
+        <hr class="my-4 border-slate-300 dark:border-slate-600">
+        <div class="flex items-center justify-between">
+            <div class="font-semibold">Subhradeep Roy Chowdhury</div><button class="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg></button>
+        </div>
+    </div>
+    <footer class="fixed bottom-0 left-0 w-full h-12 bg-slate-200/50 dark:bg-slate-800/50 backdrop-blur-lg px-4 z-[50] hidden md:flex items-center justify-center">
+        <div id="search-results-panel" class="ui-panel absolute bottom-14 w-full max-w-lg p-2 rounded-lg shadow-2xl hidden z-[51]"></div>
+        <div class="flex items-center gap-2">
+            <button id="start-btn" class="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><svg class="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M0 0h9v9H0zM11 0h9v9h-9zM0 11h9v9H0zM11 11h9v9h-9z" /></svg></button>
+            <div class="bg-white dark:bg-slate-700/80 rounded-md flex items-center px-3 py-1 w-48"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 dark:text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg><input type="text" placeholder="Search" id="search-input" class="bg-transparent text-sm ml-2 w-full focus:outline-none placeholder-slate-500 dark:placeholder-slate-400"></div>
+            <a href="https://github.com/subhradeep333" target="_blank" class="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg></a>
+            <a href="https://www.linkedin.com/in/subhradeep-roy-chowdhury-715264318" target="_blank" class="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-md"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg></a>
+        </div>
+        <div class="absolute right-4 text-sm font-semibold text-center" id="taskbar-clock"></div>
+    </footer>
+
+    <div class="block md:hidden h-screen overflow-y-auto bg-slate-900/50 dark:bg-black/70 backdrop-blur-sm text-white"></div>
+
+    <template id="window-template">
+        <div class="window absolute top-20 left-40 w-full max-w-xl h-auto shadow-2xl rounded-lg" style="z-index: 10;">
+            <div class="window-body rounded-lg overflow-hidden">
+                <div class="title-bar bg-slate-200 dark:bg-slate-700 h-8 flex items-center justify-between px-2">
+                    <span class="window-title font-semibold text-sm"></span>
+                    <button class="close-btn text-red-500 hover:bg-red-500 hover:text-white rounded-sm px-2">✕</button>
+                </div>
+                <div class="window-content p-6 h-[500px] overflow-y-auto"></div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logic to handle system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (!('theme' in localStorage)) {
+                    document.documentElement.classList.toggle('dark', event.matches);
+                }
+            });
+
+            let highestZIndex = 10;
+            const windowContainer = document.getElementById('window-container');
+
+            // --- Window Creation Logic ---
+            const createWindow = (id, title) => {
+                const existingWindow = document.querySelector(`.window[data-id="${id}"]`);
+                if (existingWindow) {
+                    focusWindow(existingWindow);
+                    return;
+                }
+                const template = document.getElementById(`window-template`);
+                if (!template) return;
+                const windowClone = template.content.cloneNode(true);
+                const windowElement = windowClone.querySelector('.window');
+                windowElement.setAttribute('data-id', id);
+                windowElement.querySelector('.window-title').textContent = title;
+                const contentArea = windowElement.querySelector('.window-content');
+                contentArea.innerHTML = `<p>Loading...</p>`;
+
+                fetch(`${id}.html`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network error');
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        contentArea.innerHTML = html;
+                        // Re-execute any scripts in the fetched HTML
+                        Array.from(contentArea.querySelectorAll("script")).forEach(oldScript => {
+                            const newScript = document.createElement("script");
+                            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                            oldScript.parentNode.replaceChild(newScript, oldScript);
+                        });
+
+                        if (id === 'settings') {
+                            setupThemeToggle(windowElement);
+                        }
+                    })
+                    .catch(error => {
+                        contentArea.innerHTML = `<p class="text-red-500">Error: Could not load content.</p>`;
+                        console.error('Fetch error:', error);
+                    });
+
+                windowContainer.appendChild(windowElement);
+                makeWindowDraggable(windowElement);
+                focusWindow(windowElement);
+                windowElement.querySelector('.close-btn').addEventListener('click', () => {
+                    windowElement.remove();
+                });
+                windowElement.addEventListener('mousedown', () => {
+                    focusWindow(windowElement);
+                });
+            };
+
+            // --- Icon Dragging Logic ---
+            const desktopIcons = document.querySelectorAll('.desktop-icon');
+            if (desktopIcons.length > 0) {
+                function saveIconPositions() {
+                    const positions = {};
+                    desktopIcons.forEach(icon => {
+                        if (icon.dataset.id) { // Only save positions for icons with a data-id
+                            positions[icon.dataset.id] = {
+                                top: icon.style.top,
+                                left: icon.style.left
+                            };
+                        } else if (icon.querySelector('span')?.textContent === 'Resume.pdf') { // Specific case for resume
+                             positions['resume'] = {
+                                top: icon.style.top,
+                                left: icon.style.left
+                            };
+                        }
+                    });
+                    localStorage.setItem('desktopIconPositions', JSON.stringify(positions));
+                }
+
+                function loadIconPositions() {
+                    const positions = JSON.parse(localStorage.getItem('desktopIconPositions'));
+                    if (positions) {
+                        desktopIcons.forEach(icon => {
+                            const id = icon.dataset.id || (icon.querySelector('span')?.textContent === 'Resume.pdf' ? 'resume' : null);
+                            if (id && positions[id]) {
+                                icon.style.top = positions[id].top;
+                                icon.style.left = positions[id].left;
+                            }
+                        });
+                    }
+                }
+
+                function makeIconDraggable(icon) {
+                    let isDragging = false, hasDragged = false, offsetX, offsetY;
+                    icon.addEventListener('mousedown', (e) => {
+                        isDragging = true;
+                        hasDragged = false;
+                        icon.classList.add('dragging');
+                        offsetX = e.clientX - icon.offsetLeft;
+                        offsetY = e.clientY - icon.offsetTop;
+                    });
+                    document.addEventListener('mousemove', (e) => {
+                        if (!isDragging) return;
+                        hasDragged = true;
+                        const desktop = document.getElementById('desktop');
+                        let x = e.clientX - offsetX, y = e.clientY - offsetY;
+                        // Boundary checks
+                        if (x < 0) x = 0;
+                        if (y < 0) y = 0;
+                        if (x + icon.offsetWidth > desktop.clientWidth) x = desktop.clientWidth - icon.offsetWidth;
+                        if (y + icon.offsetHeight > desktop.clientHeight - 48) y = desktop.clientHeight - icon.offsetHeight - 48; // 48 is taskbar height
+                        icon.style.left = `${x}px`;
+                        icon.style.top = `${y}px`;
+                    });
+                    document.addEventListener('mouseup', () => {
+                        if (isDragging) {
+                            isDragging = false;
+                            icon.classList.remove('dragging');
+                            if (hasDragged) {
+                                saveIconPositions();
+                            }
+                        }
+                    });
+                    // Open window on double click, not on drag
+                    if (icon.classList.contains('open-window-btn')) {
+                        icon.addEventListener('dblclick', (e) => {
+                           if (e.detail === 2 && !hasDragged) { // dblclick fires twice, check detail. ensure no drag.
+                                createWindow(icon.dataset.id, icon.dataset.title);
+                            }
+                        });
+                    }
+                }
+                loadIconPositions();
+                desktopIcons.forEach(makeIconDraggable);
+            }
+
+            // --- Start Menu Logic ---
+            const startBtn = document.getElementById('start-btn');
+            const startMenu = document.getElementById('start-menu');
+            if (startBtn && startMenu) {
+                function toggleStartMenu(forceShow) {
+                    const isHidden = startMenu.classList.contains('hidden');
+                    if ((isHidden && forceShow !== false) || forceShow === true) {
+                        startMenu.classList.remove('hidden');
+                        setTimeout(() => {
+                            startMenu.classList.remove('opacity-0', 'translate-y-4');
+                        }, 10);
+                    } else {
+                        startMenu.classList.add('opacity-0', 'translate-y-4');
+                        setTimeout(() => {
+                            startMenu.classList.add('hidden');
+                        }, 200);
+                    }
+                }
+                startBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleStartMenu();
+                });
+                document.addEventListener('click', (e) => {
+                    if (!startMenu.classList.contains('hidden') && !startMenu.contains(e.target) && !e.target.closest('#start-btn')) {
+                        toggleStartMenu(false);
+                    }
+                });
+                document.querySelectorAll('.start-menu-app').forEach(app => {
+                    app.addEventListener('click', () => {
+                        createWindow(app.dataset.id, app.dataset.title);
+                        toggleStartMenu(false);
+                    });
+                });
+            }
+
+            // --- Search Logic ---
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                const downloadResume = () => {
+                    const link = document.createElement('a');
+                    link.href = 'assets/resume.pdf';
+                    link.setAttribute('download', 'resume.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                };
+
+                const searchableItems = [{
+                    title: 'Settings',
+                    description: 'Change theme...',
+                    type: 'App',
+                    action: () => createWindow('settings', '⚙️ Settings')
+                }, {
+                    title: 'Projects',
+                    description: 'Browse projects.',
+                    type: 'App',
+                    action: () => createWindow('projects', '📁 Projects')
+                }, {
+                    title: 'Personal Folder',
+                    description: 'View education.',
+                    type: 'App',
+                    action: () => createWindow('education', '🎓 Education')
+                }, {
+                    title: 'Email Me',
+                    description: 'Compose an email.',
+                    type: 'App',
+                    action: () => createWindow('email', '📧 Mail')
+                }, {
+                    title: 'Achievements',
+                    description: 'View my awards.',
+                    type: 'App',
+                    action: () => createWindow('achievements', '🏆 Achievements')
+                }, {
+                    title: 'Pictures',
+                    description: 'Browse my gallery.',
+                    type: 'App',
+                    action: () => createWindow('pictures', '🏞️ Pictures')
+                }, {
+                    title: 'Terminal',
+                    description: 'Use the command line.',
+                    type: 'App',
+                    action: () => createWindow('terminal', '</> Terminal')
+                }, {
+                    title: 'Resume',
+                    description: 'Download my resume (PDF).',
+                    type: 'File',
+                    action: downloadResume
+                }];
+
+                const searchResultsPanel = document.getElementById('search-results-panel');
+
+                function displayResults(results) {
+                    searchResultsPanel.innerHTML = '';
+                    if (results.length === 0) {
+                        searchResultsPanel.innerHTML = `<div class="p-2 text-sm text-center">No results found.</div>`;
+                        searchResultsPanel.classList.remove('hidden');
+                        return;
+                    }
+                    results.forEach(item => {
+                        const resultEl = document.createElement('button');
+                        resultEl.className = 'w-full text-left p-2 hover:bg-blue-500/20 rounded-md flex justify-between items-center';
+                        resultEl.innerHTML = `<div><div class="font-semibold">${item.title}</div><div class="text-xs text-slate-600 dark:text-slate-400">${item.description}</div></div><span class="text-xs font-bold bg-slate-200 dark:bg-slate-600 px-2 py-1 rounded">${item.type}</span>`;
+                        resultEl.addEventListener('click', () => {
+                            item.action();
+                            searchInput.value = '';
+                            searchResultsPanel.classList.add('hidden');
+                        });
+                        searchResultsPanel.appendChild(resultEl);
+                    });
+                    searchResultsPanel.classList.remove('hidden');
+                }
+
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    if (query.length === 0) {
+                        searchResultsPanel.classList.add('hidden');
+                        return;
+                    }
+                    const results = searchableItems.filter(item => item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query));
+                    displayResults(results);
+                });
+
+                searchInput.addEventListener('focus', () => {
+                    if (searchInput.value.length > 0) {
+                        searchResultsPanel.classList.remove('hidden');
+                    }
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (searchResultsPanel && !e.target.closest('#search-input')) {
+                        searchResultsPanel.classList.add('hidden');
+                    }
+                });
+            }
+
+            // --- Theme Toggle Logic ---
+            function setupThemeToggle(windowElement) {
+                const themeToggle = windowElement.querySelector('#theme-toggle');
+                if (!themeToggle) return;
+                // Set initial state
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    themeToggle.checked = true;
+                }
+                // Listen for changes
+                themeToggle.addEventListener('change', () => {
+                    if (themeToggle.checked) {
+                        document.documentElement.classList.add('dark');
+                        localStorage.theme = 'dark';
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.theme = 'light';
+                    }
+                });
+            }
+
+            // --- Window Dragging & Focusing ---
+            function focusWindow(windowElement) {
+                highestZIndex++;
+                windowElement.style.zIndex = highestZIndex;
+            }
+
+            function makeWindowDraggable(element) {
+                const titleBar = element.querySelector('.title-bar');
+                let isDragging = false,
+                    offsetX, offsetY;
+                titleBar.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    offsetX = e.clientX - element.offsetLeft;
+                    offsetY = e.clientY - element.offsetTop;
+                    element.style.cursor = 'grabbing';
+                    focusWindow(element);
+});
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    let x = e.clientX - offsetX,
+                        y = e.clientY - offsetY;
+                    const desktop = document.getElementById('desktop');
+                    if (desktop) {
+                        // Boundary checks
+                        if (x < 0) x = 0;
+                        if (y < 0) y = 0;
+                        if (x + element.offsetWidth > desktop.clientWidth) x = desktop.clientWidth - element.offsetWidth;
+                        if (y + element.offsetHeight > desktop.clientHeight - 48) y = desktop.clientHeight - element.offsetHeight - 48; // 48 is taskbar height
+                        element.style.left = `${x}px`;
+                        element.style.top = `${y}px`;
+                    }
+                });
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    element.style.cursor = 'default';
+                });
+            }
+
+            // --- Taskbar Clock ---
+            const clockElement = document.getElementById('taskbar-clock');
+            if (clockElement) {
+                function updateClock() {
+                    const now = new Date();
+                    const time = now.toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    const date = now.toLocaleDateString();
+                    clockElement.innerHTML = `<span>${time}</span><span class='block text-xs'>${date}</span>`;
+                }
+                updateClock();
+                setInterval(updateClock, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
