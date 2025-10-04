@@ -2,7 +2,8 @@
 
 > _"A desktop experience — reimagined for the web."_
 
-![Portfolio Preview](https://your-screenshot-link.png)
+![Portfolio Preview](images/picc/Screenshot_2025-10-05_010825.png)
+
 
 Welcome to my **Windows-style portfolio website**, a fully functional personal desktop experience built using modern web technologies.  
 This isn’t just a website — it’s an **interactive OS simulation** that showcases my skills, projects, and creativity all in one place!
